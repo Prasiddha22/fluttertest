@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/page2.dart';
+import 'package:test/old/page2.dart';
 
 class User extends StatefulWidget {
   const User({Key? key}) : super(key: key);
