@@ -62,7 +62,23 @@ class _UserState extends State<User> {
                     Text('Hello! My name is Prasiddha Neupane'),
                   ],
                 ),
-              )
+              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     print('Tapped 2');
+              //   },
+              //   child: Container(
+              //     padding:
+              //         const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              //     decoration: BoxDecoration(
+              //         color: Colors.red,
+              //         borderRadius: BorderRadius.circular(10)),
+              //     child: const Text(
+              //       'Go to page 2',
+              //       style: TextStyle(color: Colors.white),
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),
