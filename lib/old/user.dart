@@ -72,10 +72,6 @@ class _UserState extends State<User> {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => const Page2()));
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => Page2()),
-                    // );
                   },
                   child: const Text('Go to page 2'))
               // GestureDetector(
