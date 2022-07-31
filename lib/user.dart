@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/page2.dart';
 
 class User extends StatefulWidget {
   const User({Key? key}) : super(key: key);
@@ -8,6 +9,10 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
+  onTap() {
+    print('Hello');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +68,16 @@ class _UserState extends State<User> {
                   ],
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const Page2()));
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => Page2()),
+                    // );
+                  },
+                  child: const Text('Go to page 2'))
               // GestureDetector(
               //   onTap: () {
               //     print('Tapped 2');
