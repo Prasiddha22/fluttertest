@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test/old/page2.dart';
 
 class User extends StatefulWidget {
   const User({Key? key}) : super(key: key);
@@ -9,6 +8,13 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
+  String name = "";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   onTap() {
     print('Hello');
   }
@@ -41,9 +47,9 @@ class _UserState extends State<User> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'Prasidda Neupane',
-                style: TextStyle(
+              Text(
+                name,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000),
@@ -70,11 +76,16 @@ class _UserState extends State<User> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const Page2()));
+                    if (name == '') {
+                      name = "Prasiddha Neupane";
+                    } else {
+                      name = "";
+                    }
+                    setState(() {});
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => const Page2()));
                   },
                   child: const Text('Go to page 2'))
-              
             ],
           ),
         ),
