@@ -38,6 +38,20 @@ class _HomeState extends State<Home> {
     });
   }
 
+  deleteTodo(String id) async {
+    var url = "${baseUrl}delete_todo.php";
+    var parseUri = Uri.parse(url);
+    var resp = await http.post(parseUri, body: {'id': id});
+    var decoded = json.decode(resp.body);
+
+    if (decoded['success']) {
+      print('Success');
+      getTodos();
+    } else {
+      print('Failed');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +141,31 @@ class _HomeState extends State<Home> {
                                 label: 'Edit',
                               ),
                               SlidableAction(
-                                onPressed: (val) {},
+                                onPressed: (val) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: const Text('Delete?'),
+                                            content: const Text(
+                                                'Are you sure you want to delete?'),
+                                            actions: [
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.red),
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text('Cancel')),
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    deleteTodo(todo.id!);
+                                                  },
+                                                  child: const Text('Confirm'))
+                                            ],
+                                          ));
+                                },
                                 backgroundColor: const Color(0xFFff0000),
                                 foregroundColor: Colors.white,
                                 icon: Icons.delete,
