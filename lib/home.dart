@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:test/shared/base_url.dart';
 import 'package:test/todo.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,6 +14,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getTodos();
+  }
+
+  getTodos() async {
+    var url = "${baseUrl}get_todo.php";
+    var parseUri = Uri.parse(url);
+    var resp = await http.get(parseUri);
+    var decoded = json.decode(resp.body);
+
+    print(decoded['success']);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
