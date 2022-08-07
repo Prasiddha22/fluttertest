@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:test/models/todo.dart';
 import 'package:test/shared/base_url.dart';
 import 'package:test/todo.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Todo> todos = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -28,7 +31,11 @@ class _HomeState extends State<Home> {
     var resp = await http.get(parseUri);
     var decoded = json.decode(resp.body);
 
-    print(decoded['success']);
+    List<Todo> todoList = AllTodo.fromJson(decoded).todo!;
+
+    setState(() {
+      todos = todoList;
+    });
   }
 
   @override
@@ -46,18 +53,24 @@ class _HomeState extends State<Home> {
             ),
           ),
           actions: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-                borderRadius: BorderRadius.circular(14.0),
-                border: Border.all(width: 1.0, color: const Color(0xff707070)),
-              ),
-              child: const Icon(
-                Icons.add,
-                color: Colors.black,
-                size: 30,
+            InkWell(
+              onTap: () {
+                getTodos();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: const Color(0xffffffff),
+                  borderRadius: BorderRadius.circular(14.0),
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xff707070)),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 30,
+                ),
               ),
             )
           ],
@@ -100,9 +113,9 @@ class _HomeState extends State<Home> {
               Expanded(
                   child: SingleChildScrollView(
                 child: Column(
-                  children: [1, 2, 3, 4, 5]
+                  children: todos
                       .map(
-                        (e) => Slidable(
+                        (Todo todo) => Slidable(
                           endActionPane: ActionPane(
                             motion: const ScrollMotion(),
                             children: [
@@ -125,9 +138,9 @@ class _HomeState extends State<Home> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const Todo()));
+                                  builder: (context) => const Todos()));
                             },
-                            child: const TodoCard(),
+                            child: TodoCard(todo: todo),
                           ),
                         ),
                       )
@@ -141,7 +154,9 @@ class _HomeState extends State<Home> {
 }
 
 class TodoCard extends StatelessWidget {
-  const TodoCard({Key? key}) : super(key: key);
+  const TodoCard({Key? key, required this.todo}) : super(key: key);
+
+  final Todo todo;
 
   @override
   Widget build(BuildContext context) {
@@ -163,33 +178,33 @@ class TodoCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
-            'To Do',
-            style: TextStyle(
+            todo.title!,
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontSize: 23,
               color: Color(0xff000000),
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
-            '7/31/2022',
-            style: TextStyle(
+            todo.date!,
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontSize: 15,
               color: Color(0xff000000),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ',
-            style: TextStyle(
+            todo.description!,
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontSize: 15,
               color: Color(0xff000000),
