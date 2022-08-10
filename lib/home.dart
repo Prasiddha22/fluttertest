@@ -81,6 +81,11 @@ class _HomeState extends State<Home> {
     }
   }
 
+  onTodoAdd() {
+    print(titleController.text);
+    print(descriptionController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,8 +105,16 @@ class _HomeState extends State<Home> {
               onTap: () {
                 showDialog(
                     context: (context),
-                    builder: (context) => const Dialog(
-                          child: AddTodo(),
+                    builder: (context) => Dialog(
+                          child: AddTodo(
+                              titleController: titleController,
+                              descriptionController: descriptionController,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onConfirm: () {
+                                onTodoAdd();
+                              }),
                         ));
               },
               child: Container(

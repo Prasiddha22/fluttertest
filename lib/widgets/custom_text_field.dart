@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({Key? key, this.onChange, this.hint = ""})
+  const CustomTextField(
+      {Key? key, this.onChange, this.hint = "", this.controller})
       : super(key: key);
 
   final Function? onChange;
   final String? hint;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        controller: controller,
         onChanged: (String query) {
           if (onChange != null) {
             onChange!(query);
