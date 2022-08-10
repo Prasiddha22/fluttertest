@@ -6,7 +6,9 @@ import 'package:test/models/todo.dart';
 import 'package:test/shared/base_url.dart';
 import 'package:test/todo.dart';
 import 'package:http/http.dart' as http;
+import 'package:test/widgets/add_todo.dart';
 import 'package:test/widgets/alert_dialog.dart';
+import 'package:test/widgets/custom_text_field.dart';
 import 'package:test/widgets/todo_card.dart';
 
 class Home extends StatefulWidget {
@@ -19,6 +21,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Todo> todos = [];
   List<Todo> filteredTodo = [];
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   void initState() {
@@ -93,7 +98,11 @@ class _HomeState extends State<Home> {
           actions: [
             InkWell(
               onTap: () {
-                getTodos();
+                showDialog(
+                    context: (context),
+                    builder: (context) => const Dialog(
+                          child: AddTodo(),
+                        ));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -118,35 +127,9 @@ class _HomeState extends State<Home> {
           margin: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(15.0),
-                  border:
-                      Border.all(width: 1.0, color: const Color(0x80cfcfcf)),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x29000000),
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
-                child: TextFormField(
-                  onChanged: (String query) {
-                    searchTodo(query);
-                  },
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Search . . .',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 15,
-                      color: Color(0xffb5b5b5),
-                    ),
-                  ),
-                ),
+              CustomTextField(
+                hint: 'Search . . .',
+                onChange: searchTodo,
               ),
               const SizedBox(
                 height: 20,
