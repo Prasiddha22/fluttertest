@@ -43,7 +43,23 @@ class _HomeState extends State<Home> {
   }
 
   searchTodo(String query) {
-    print(query);
+    if (query.isEmpty) {
+      setState(() {
+        filteredTodo = todos;
+      });
+    } else {
+      List<Todo> temp = [];
+
+      todos.map((e) {
+        if (e.title!.toLowerCase().contains(query.toLowerCase())) {
+          temp.add(e);
+        }
+      }).toList();
+
+      setState(() {
+        filteredTodo = temp;
+      });
+    }
   }
 
   deleteTodo(String id) async {
@@ -118,6 +134,9 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 child: TextFormField(
+                  onChanged: (String query) {
+                    searchTodo(query);
+                  },
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Search . . .',
@@ -135,7 +154,7 @@ class _HomeState extends State<Home> {
               Expanded(
                   child: SingleChildScrollView(
                 child: Column(
-                  children: todos
+                  children: filteredTodo
                       .map(
                         (Todo todo) => Slidable(
                           endActionPane: ActionPane(
