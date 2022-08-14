@@ -236,7 +236,9 @@ class _HomeState extends State<Home> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const Todos()));
+                                  builder: (context) => Todos(
+                                        todo: todo,
+                                      )));
                             },
                             child: TodoCard(todo: todo),
                           ),
