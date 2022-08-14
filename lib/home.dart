@@ -6,7 +6,7 @@ import 'package:test/models/todo.dart';
 import 'package:test/shared/base_url.dart';
 import 'package:test/todo.dart';
 import 'package:http/http.dart' as http;
-import 'package:test/widgets/add_todo.dart';
+import 'package:test/widgets/add_edit_todo.dart';
 import 'package:test/widgets/alert_dialog.dart';
 import 'package:test/widgets/custom_text_field.dart';
 import 'package:test/widgets/todo_card.dart';
@@ -24,6 +24,10 @@ class _HomeState extends State<Home> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+  String todoId = '';
+
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -81,9 +85,59 @@ class _HomeState extends State<Home> {
     }
   }
 
-  onTodoAdd() {
-    print(titleController.text);
-    print(descriptionController.text);
+  onTodoAdd(context) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    var url = "${baseUrl}add_todo.php";
+    var body = {
+      'title': titleController.text,
+      'description': descriptionController.text,
+    };
+    if (todoId.isNotEmpty) {
+      url = "${baseUrl}update_todo.php";
+      body['id'] = todoId;
+    }
+
+    var parseUri = Uri.parse(url);
+    var resp = await http.post(parseUri, body: body);
+    var decoded = json.decode(resp.body);
+
+    if (decoded['success']) {
+      print('Success');
+      getTodos();
+      titleController.clear();
+      descriptionController.clear();
+      Navigator.pop(context);
+    } else {
+      print('Failed');
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  displayAddEditModal(context) {
+    showDialog(
+        context: (context),
+        builder: (context) => Dialog(
+              child: AddEditTodo(
+                  titleController: titleController,
+                  descriptionController: descriptionController,
+                  todoId: todoId,
+                  onCancel: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      todoId = '';
+                    });
+                    titleController.clear();
+                    descriptionController.clear();
+                  },
+                  onConfirm: () {
+                    onTodoAdd(context);
+                  }),
+            ));
   }
 
   @override
@@ -103,19 +157,7 @@ class _HomeState extends State<Home> {
           actions: [
             InkWell(
               onTap: () {
-                showDialog(
-                    context: (context),
-                    builder: (context) => Dialog(
-                          child: AddTodo(
-                              titleController: titleController,
-                              descriptionController: descriptionController,
-                              onCancel: () {
-                                Navigator.pop(context);
-                              },
-                              onConfirm: () {
-                                onTodoAdd();
-                              }),
-                        ));
+                displayAddEditModal(context);
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -140,6 +182,7 @@ class _HomeState extends State<Home> {
           margin: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
+              if (isLoading) const Text('Loading . . .'),
               CustomTextField(
                 hint: 'Search . . .',
                 onChange: searchTodo,
@@ -157,7 +200,15 @@ class _HomeState extends State<Home> {
                             motion: const ScrollMotion(),
                             children: [
                               SlidableAction(
-                                onPressed: (val) {},
+                                onPressed: (val) {
+                                  setState(() {
+                                    todoId = todo.id!;
+                                  });
+                                  titleController.text = todo.title!;
+                                  descriptionController.text =
+                                      todo.description!;
+                                  displayAddEditModal(context);
+                                },
                                 backgroundColor: const Color(0xFF93B7FF),
                                 foregroundColor: Colors.white,
                                 icon: Icons.edit,

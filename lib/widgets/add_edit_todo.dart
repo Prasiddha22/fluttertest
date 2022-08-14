@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:test/widgets/custom_text_field.dart';
 
-class AddTodo extends StatelessWidget {
-  const AddTodo(
-      {Key? key,
-      this.titleController,
-      this.descriptionController,
-      this.onCancel,
-      this.onConfirm})
-      : super(key: key);
+class AddEditTodo extends StatelessWidget {
+  const AddEditTodo({
+    Key? key,
+    this.titleController,
+    this.descriptionController,
+    this.onCancel,
+    this.onConfirm,
+    this.todoId,
+  }) : super(key: key);
 
   final TextEditingController? titleController;
   final TextEditingController? descriptionController;
   final Function? onCancel;
   final Function? onConfirm;
+  final String? todoId;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,13 @@ class AddTodo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Add Todo',
-                  style: TextStyle(fontSize: 25),
+                Text(
+                  '${todoId!.isNotEmpty ? 'Edit' : 'Add'} Todo',
+                  style: const TextStyle(fontSize: 25),
                 ),
                 InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      onCancel!();
                     },
                     child: const Icon(Icons.clear)),
               ],
@@ -70,7 +72,7 @@ class AddTodo extends StatelessWidget {
                     onPressed: () {
                       onConfirm!();
                     },
-                    child: const Text('Add')),
+                    child: Text(todoId!.isNotEmpty ? 'Update' : 'Add')),
               ],
             ),
           ],
