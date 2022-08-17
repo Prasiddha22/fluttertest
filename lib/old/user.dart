@@ -18,6 +18,7 @@ class _UserState extends State<User> {
     super.initState();
   }
 
+  // create a method that will be called when the button is pressed
   onTap() {
     print('Hello');
   }
