@@ -20,7 +20,7 @@ class _UserState extends State<User> {
 
   // create a method that will be called when the button is pressed
   onTap() {
-    // set the state of the name to the name that is entered in the text field
+    // print hello
     print('Hello');
   }
 
