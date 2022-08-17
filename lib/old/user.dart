@@ -1,6 +1,7 @@
 //import material.dart;
 import 'package:flutter/material.dart';
 
+// create a class that extends the stateless widget
 class User extends StatefulWidget {
   const User({Key? key}) : super(key: key);
 
@@ -9,6 +10,7 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
+  // create a state with name : name
   String name = "";
 
   @override
