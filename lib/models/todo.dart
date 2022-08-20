@@ -35,6 +35,7 @@ class AllTodo {
   }
 }
 
+// Create a class model
 class Todo {
   String? id;
   String? title;
