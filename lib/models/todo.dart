@@ -44,6 +44,7 @@ class Todo {
   // Create a constructor
   Todo({this.id, this.title, this.description, this.date});
 
+  // Create a fromJson method
   Todo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
