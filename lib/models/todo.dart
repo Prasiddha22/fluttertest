@@ -12,6 +12,7 @@ class AllTodo {
   // }
 
   // Create a fromJson method
+  // Converts a json object to a AllTodo object
   AllTodo.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
