@@ -23,6 +23,7 @@ class AllTodo {
     }
   }
 
+  // Create a toJson method
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
