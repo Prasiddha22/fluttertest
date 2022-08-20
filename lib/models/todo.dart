@@ -53,6 +53,8 @@ class Todo {
     date = json['date'];
   }
 
+  // Create a toJson method
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
