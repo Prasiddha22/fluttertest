@@ -3,6 +3,7 @@ class AllTodo {
   bool? success;
   List<Todo>? todo;
 
+  // Create a constructor
   AllTodo({this.success, this.todo});
 
   // AllTodo(bool success, List<Todo>? todo) {
