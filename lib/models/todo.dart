@@ -24,6 +24,7 @@ class AllTodo {
   }
 
   // Create a toJson method
+  // Converts a AllTodo object to a json object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
