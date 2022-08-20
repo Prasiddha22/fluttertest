@@ -54,7 +54,7 @@ class Todo {
   }
 
   // Create a toJson method
-
+  // Converts a Todo object to a json object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
