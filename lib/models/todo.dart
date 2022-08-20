@@ -11,6 +11,7 @@ class AllTodo {
   //   this.todo = todo;
   // }
 
+  // Create a fromJson method
   AllTodo.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
