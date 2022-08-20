@@ -41,7 +41,7 @@ class Todo {
   String? title;
   String? description;
   String? date;
-
+  // Create a constructor
   Todo({this.id, this.title, this.description, this.date});
 
   Todo.fromJson(Map<String, dynamic> json) {
