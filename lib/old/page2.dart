@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Creating a class named Page2
 class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);
 
