@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Custom alert dialog for the application
 customAlertDialog(
     {context,
     title,
