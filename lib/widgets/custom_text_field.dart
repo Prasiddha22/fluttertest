@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// CUstom testfield for the input application
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
       {Key? key, this.onChange, this.hint = "", this.controller})
