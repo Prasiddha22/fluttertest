@@ -72,6 +72,7 @@ class AddEditTodo extends StatelessWidget {
                     onPressed: () {
                       onConfirm!();
                     },
+                    // If todo id is not empty then we consider it as an update process and we update the text in the button
                     child: Text(todoId!.isNotEmpty ? 'Update' : 'Add')),
               ],
             ),
