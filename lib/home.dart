@@ -11,6 +11,7 @@ import 'package:test/widgets/alert_dialog.dart';
 import 'package:test/widgets/custom_text_field.dart';
 import 'package:test/widgets/todo_card.dart';
 
+// Home widget
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
