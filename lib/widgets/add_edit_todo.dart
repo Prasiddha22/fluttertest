@@ -28,6 +28,7 @@ class AddEditTodo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
+                  // we will update the title based on the todoId
                   '${todoId!.isNotEmpty ? 'Edit' : 'Add'} Todo',
                   style: const TextStyle(fontSize: 25),
                 ),
