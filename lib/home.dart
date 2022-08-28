@@ -22,8 +22,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // Create state todos
   List<Todo> todos = [];
+  // Crate state filteredTodo
   List<Todo> filteredTodo = [];
 
+// Create text editiong controller titleController
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
