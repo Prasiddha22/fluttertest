@@ -27,8 +27,11 @@ class _HomeState extends State<Home> {
 
 // Create text editiong controller titleController
   TextEditingController titleController = TextEditingController();
+
+  // Create text editiong controller descriptionController
   TextEditingController descriptionController = TextEditingController();
 
+  // Create state todoId
   String todoId = '';
 
   bool isLoading = false;
