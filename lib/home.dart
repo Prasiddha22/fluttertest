@@ -42,6 +42,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
 
+    // Call the function to fetch all the todos
     getTodos();
   }
 
