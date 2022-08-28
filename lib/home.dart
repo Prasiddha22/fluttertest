@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // Create state todos
   List<Todo> todos = [];
   List<Todo> filteredTodo = [];
 
