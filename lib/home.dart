@@ -67,6 +67,7 @@ class _HomeState extends State<Home> {
     });
   }
 
+  // Search todo function
   searchTodo(String query) {
     if (query.isEmpty) {
       setState(() {
