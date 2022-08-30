@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
 
 // Create a function to fetch all todos
   getTodos() async {
+    // assign the URL
     var url = "${baseUrl}get_todo.php";
     var parseUri = Uri.parse(url);
     var resp = await http.get(parseUri);
