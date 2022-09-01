@@ -54,6 +54,7 @@ class _HomeState extends State<Home> {
     var parseUri = Uri.parse(url);
     // Make the request and return the response
     var resp = await http.get(parseUri);
+    // Parse the response
     var decoded = json.decode(resp.body);
 
     List<Todo> todoList = AllTodo.fromJson(decoded).todo!;
