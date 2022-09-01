@@ -57,6 +57,7 @@ class _HomeState extends State<Home> {
     // Parse the response
     var decoded = json.decode(resp.body);
 
+    // Assign the todos
     List<Todo> todoList = AllTodo.fromJson(decoded).todo!;
 
     setState(() {
