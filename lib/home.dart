@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
     var url = "${baseUrl}get_todo.php";
     // Parse the URL
     var parseUri = Uri.parse(url);
+    // Make the request and return the response
     var resp = await http.get(parseUri);
     var decoded = json.decode(resp.body);
 
