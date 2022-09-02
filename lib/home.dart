@@ -60,6 +60,7 @@ class _HomeState extends State<Home> {
     // Assign the todos
     List<Todo> todoList = AllTodo.fromJson(decoded).todo!;
 
+    // Update the state
     setState(() {
       todos = todoList;
       filteredTodo = todoList;
