@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
       {Key? key, this.onChange, this.hint = "", this.controller})
       : super(key: key);
 
+  // Accept onChange function
   final Function? onChange;
   final String? hint;
   final TextEditingController? controller;
