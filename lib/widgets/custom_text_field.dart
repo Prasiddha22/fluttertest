@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
 
   // Accept onChange function
   final Function? onChange;
+  // Accept hint
   final String? hint;
   final TextEditingController? controller;
 
