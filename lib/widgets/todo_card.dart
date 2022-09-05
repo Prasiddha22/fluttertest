@@ -5,6 +5,7 @@ import 'package:test/models/todo.dart';
 class TodoCard extends StatelessWidget {
   const TodoCard({Key? key, required this.todo}) : super(key: key);
 
+  // Accept todo
   final Todo todo;
 
   @override
